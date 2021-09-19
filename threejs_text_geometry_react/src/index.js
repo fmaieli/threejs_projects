@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import ConfettiStream from '../fonts/Confetti Stream_Regular.json';
 
 class App extends React.Component {
 
@@ -11,10 +12,11 @@ class App extends React.Component {
 
         // CAMERA
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
         // INIT CAMERA
         camera.position.z = 45;
         camera.position.x = 3;
-        camera.position.y = 20;
+        camera.position.y = 12;
 
         // RENDERER
         const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -27,7 +29,7 @@ class App extends React.Component {
         controls.target = new THREE.Vector3(0, 0, -40);
         controls.update();
 
-        // RESIZE HAMDLER
+        // RESIZE HANDLER
         function onWindowResize() {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -42,10 +44,17 @@ class App extends React.Component {
         scene.background = new THREE.Color(0xffffff);
 
         // FLOOR
-        const plane = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshPhongMaterial({ color: 0x0a7d15 }));
+        const plane = new THREE.Mesh(new THREE.PlaneGeometry(175, 100), new THREE.MeshPhongMaterial({ color: 0x4efc03 }));
         plane.rotation.x = - Math.PI / 2
         plane.receiveShadow = true
         scene.add(plane);
+
+        // WALL
+        const plane_wall = new THREE.Mesh(new THREE.PlaneGeometry(175, 50), new THREE.MeshPhongMaterial({ color: 0x4efc03 }));
+        plane_wall.position.y = + 25
+        plane_wall.position.z = - 50
+        plane_wall.receiveShadow = true
+        scene.add(plane_wall);
 
         // POINT LIGHT
         const light1 = new THREE.PointLight(0xff6666, 1, 100);
@@ -61,88 +70,32 @@ class App extends React.Component {
         scene.add(light2);
 
         // TEXT
-
+        THREE.Cache.enabled = true;
         const loader = new THREE.FontLoader();
 
-        loader.load('./fonts/optimer_bold.typeface.json', function (font) {
-            const geometry = new THREE.TextGeometry('three.js', {
-                font: font,
-                size: 5,
-                height: 1,
-                curveSegments: 10,
-                bevelEnabled: false,
-                bevelOffset: 0,
-                bevelSegments: 1,
-                bevelSize: 0.3,
-                bevelThickness: 1
-            });
-            const materials = [
-                new THREE.MeshPhongMaterial({ color: 0xff6600 }), // front
-                new THREE.MeshPhongMaterial({ color: 0x0000ff }) // side
-            ];
-            const textMesh1 = new THREE.Mesh(geometry, materials);
-            textMesh1.castShadow = true
-            textMesh1.position.y += 10
-            textMesh1.position.x -= 6
-            textMesh1.rotation.y = 0.25
-            scene.add(textMesh1)
+        var font = loader.parse(ConfettiStream);
+        const geometry = new THREE.TextGeometry('three.js', {
+            font: font,
+            size: 6,
+            height: 3,
+            curveSegments: 10,
+            bevelEnabled: false,
+            bevelOffset: 0,
+            bevelSegments: 1,
+            bevelSize: 0.3,
+            bevelThickness: 1
         });
 
-        loader.load('./fonts/Teko_Medium_Regular.json', function (font) {
-            const geometry = new THREE.TextGeometry('3D TEXT', {
-                font: font,
-                size: 5,
-                height: 2,
-                curveSegments: 10,
-                bevelEnabled: false,
-                bevelOffset: 0,
-                bevelSegments: 1,
-                bevelSize: 0.3,
-                bevelThickness: 1
-            });
-            const materials = [
-                new THREE.MeshPhongMaterial({ color: 0xa8325c }), // front
-                new THREE.MeshPhongMaterial({ color: 0x540722 }) // side
-            ];
-            const textMesh2 = new THREE.Mesh(geometry, materials);
-            textMesh2.castShadow = true
-            textMesh2.position.y += 5
-            textMesh2.position.x -= 6
-            textMesh2.rotation.y = -0.25
-            scene.add(textMesh2)
-        });
+        const materials = [
+            new THREE.MeshPhongMaterial({ color: 0xff6600 }), // front
+            new THREE.MeshPhongMaterial({ color: 0x0000ff }) // side
+        ];
 
-        loader.load('fonts/Teko_Medium_Regular.json', function (font) {
-
-            const color = 0xffb8fb;
-
-            const matLite = new THREE.MeshBasicMaterial({
-                color: color,
-                transparent: true,
-                opacity: 0.4,
-                side: THREE.DoubleSide
-            });
-
-            const message = "(´°_°`)";
-
-            const shapes = font.generateShapes(message, 20);
-
-            const geometry = new THREE.ShapeGeometry(shapes);
-
-            geometry.computeBoundingBox();
-
-            const xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-
-            geometry.translate(xMid, 0, 0);
-
-            // make shape ( N.B. edge view not visible )
-
-            const text = new THREE.Mesh(geometry, matLite);
-            text.position.z = -40
-            text.position.y = 5
-            scene.add(text);
-
-        }); //end load function
+        const textMesh1 = new THREE.Mesh(geometry, materials);
+        textMesh1.castShadow = true
+        textMesh1.position.y += 3
+        textMesh1.position.x -= 12
+        scene.add(textMesh1)
 
         // ANIMATE
         function animate() {
@@ -158,9 +111,9 @@ class App extends React.Component {
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         }
+
         document.body.appendChild(renderer.domElement);
         animate();
-
     }
 
     render() {
