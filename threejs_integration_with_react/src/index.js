@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import * as THREE from 'three';
-import { animate } from './threejs_functions/animate_cube';
 
 class App extends React.Component {
 
