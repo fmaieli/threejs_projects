@@ -46,9 +46,7 @@ Some posible solutions for the CORS error are these:
 * Use [http-server](https://www.npmjs.com/package/http-server) and host locally the fonts, use this line of code:
 
 ```
-
 http-server . -p 8000 --cors
-
 ```
 
 Then you can use:
