@@ -28,3 +28,16 @@ Some pages and tools that help in the making of this project:
 * Converter of .ttf files to .json or .js -> [Facetype.js](http://gero3.github.io/facetype.js/)
 * [1001freefonts](https://www.1001freefonts.com/)
 * [3D Text and Fonts](https://www.youtube.com/watch?v=IA3HjAV2nzU&ab_channel=Genka) and the [Repo] (https://github.com/tamani-coding/threejs-text-example)
+
+## Common Errors
+
+* Problems getting the fonts from a local folder: CORS (Cross-Origin Request Blocked) [CORS Errors](https://developer.mozilla.org/es/docs/Web/HTTP/CORS/Errors)
+
+```js
+
+loader.load('./fonts/Confetti_Stream_Regular.json', ...)
+
+```
+
+# Three.js Loading 3D Models
+
