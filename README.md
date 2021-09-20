@@ -29,13 +29,60 @@ Some pages and tools that help in the making of this project:
 * [1001freefonts](https://www.1001freefonts.com/)
 * [3D Text and Fonts](https://www.youtube.com/watch?v=IA3HjAV2nzU&ab_channel=Genka) and the [Repo] (https://github.com/tamani-coding/threejs-text-example)
 
-## Common Errors
+### Common Errors
 
 * Problems getting the fonts from a local folder: CORS (Cross-Origin Request Blocked) [CORS Errors](https://developer.mozilla.org/es/docs/Web/HTTP/CORS/Errors)
 
 ```js
 
 loader.load('./fonts/Confetti_Stream_Regular.json', ...)
+
+```
+
+### Solutions
+
+Some posible solutions for the CORS error are these:
+
+* Use [http-server](https://www.npmjs.com/package/http-server) and host locally the fonts, use this line of code:
+
+```
+
+http-server . -p 8000 --cors
+
+```
+
+Then you can use:
+
+```js
+
+loader.load('http://localhost:8000/fonts/Confetti_Stream_Regular.json', ...)
+
+```
+
+* The other option is to import the font, in a .json file, into the component:
+
+```js
+
+import ConfettiStream from '../fonts/Confetti_Stream_Regular.json';
+
+```
+
+Then you 'parse' the font:
+
+```js
+
+var font = loader.parse(ConfettiStream);
+
+```
+
+And you can use it normally in TextGeometry:
+
+```js
+
+const geometry = new THREE.TextGeometry('three.js', {
+    font: font,
+    ...
+});
 
 ```
 
