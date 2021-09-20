@@ -1,8 +1,8 @@
 # Three.js Basic Tutorial
 
-This project is a static page with three.js, to make it happend I used [http-server](https://www.npmjs.com/package/http-server)
+This project is a static page with three.js, to make it happend I used [http-server](https://www.npmjs.com/package/http-server).
 
-[Creating a scene](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
+* [Creating a scene](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
 
 # Three.js Integration with React
 
@@ -14,7 +14,7 @@ It's the exact same project but with babel and webpack.
 
 This project it's about the tutorial of drawing lines in the documentation of three.js
 
-[Drawing lines](https://threejs.org/docs/index.html#manual/en/introduction/Drawing-lines)
+* [Drawing lines](https://threejs.org/docs/index.html#manual/en/introduction/Drawing-lines)
 
 # Three.js Text Geometry with React
 
