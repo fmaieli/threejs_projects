@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import ConfettiStream from '../fonts/Confetti Stream_Regular.json';
+import ConfettiStream from '../fonts/Confetti_Stream_Regular.json';
 
 class App extends React.Component {
 
