@@ -73,29 +73,54 @@ class App extends React.Component {
         THREE.Cache.enabled = true;
         const loader = new THREE.FontLoader();
 
-        var font = loader.parse(ConfettiStream);
-        const geometry = new THREE.TextGeometry('three.js', {
-            font: font,
-            size: 6,
-            height: 3,
-            curveSegments: 10,
-            bevelEnabled: false,
-            bevelOffset: 0,
-            bevelSegments: 1,
-            bevelSize: 0.3,
-            bevelThickness: 1
+        loader.load('http://localhost:8000/fonts/Confetti_Stream_Regular.json', function(font) {
+            const geometry = new THREE.TextGeometry('three.js', {
+                font: font,
+                size: 6,
+                height: 3,
+                curveSegments: 10,
+                bevelEnabled: false,
+                bevelOffset: 0,
+                bevelSegments: 1,
+                bevelSize: 0.3,
+                bevelThickness: 1
+            });
+    
+            const materials = [
+                new THREE.MeshPhongMaterial({ color: 0xff6600 }), // front
+                new THREE.MeshPhongMaterial({ color: 0x0000ff }) // side
+            ];
+    
+            const textMesh1 = new THREE.Mesh(geometry, materials);
+            textMesh1.castShadow = true
+            textMesh1.position.y += 3
+            textMesh1.position.x -= 12
+            scene.add(textMesh1)
         });
 
-        const materials = [
-            new THREE.MeshPhongMaterial({ color: 0xff6600 }), // front
-            new THREE.MeshPhongMaterial({ color: 0x0000ff }) // side
-        ];
+        // var font = loader.parse(ConfettiStream);
+        // const geometry = new THREE.TextGeometry('three.js', {
+        //     font: font,
+        //     size: 6,
+        //     height: 3,
+        //     curveSegments: 10,
+        //     bevelEnabled: false,
+        //     bevelOffset: 0,
+        //     bevelSegments: 1,
+        //     bevelSize: 0.3,
+        //     bevelThickness: 1
+        // });
 
-        const textMesh1 = new THREE.Mesh(geometry, materials);
-        textMesh1.castShadow = true
-        textMesh1.position.y += 3
-        textMesh1.position.x -= 12
-        scene.add(textMesh1)
+        // const materials = [
+        //     new THREE.MeshPhongMaterial({ color: 0xff6600 }), // front
+        //     new THREE.MeshPhongMaterial({ color: 0x0000ff }) // side
+        // ];
+
+        // const textMesh1 = new THREE.Mesh(geometry, materials);
+        // textMesh1.castShadow = true
+        // textMesh1.position.y += 3
+        // textMesh1.position.x -= 12
+        // scene.add(textMesh1)
 
         // ANIMATE
         function animate() {
